@@ -1,6 +1,6 @@
 const express = require('express');
-const { getUrls, postUrls } = require('../sercice/urlSercice.js');
-const { verifyAccessToken } = require('../sercice/authService');
+const { getUrls, postUrls } = require('../controller/urlController.js');
+const { verifyAccessToken } = require('../controller/authController.js');
 
 const router = express.Router();
 

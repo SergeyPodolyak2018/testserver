@@ -78,5 +78,13 @@ const MESSAGE = {
       },
     };
   },
+  USERS: (data) => {
+    return {
+      status: statusIndex.OK,
+      data: {
+        users: data,
+      },
+    };
+  },
 };
 module.exports = MESSAGE;

@@ -16,7 +16,7 @@ const getByName = (name) => {
 };
 
 const getAll = () => {
-  return [...userRep];
+  return userRep;
 };
 
 module.exports = { save, get, getAll, getByName };

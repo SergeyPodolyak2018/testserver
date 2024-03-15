@@ -1,8 +1,8 @@
 const express = require('express');
-const { loginUser } = require('../sercice/loginService');
+const { loginUser, loginUserPage } = require('../controller/loginController');
 
 const router = express.Router();
 
-router.route(`/`).post(loginUser);
+router.route(`/`).get(loginUserPage).post(loginUser);
 
 module.exports = router;

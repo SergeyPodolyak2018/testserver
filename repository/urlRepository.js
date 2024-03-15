@@ -14,7 +14,7 @@ const modify = (id) => {
 };
 
 const getAll = () => {
-  return [...urlRep];
+  return Array.from(urlRep).map(([name, value]) => value);
 };
 
 module.exports = { save, get, getAll, modify };
