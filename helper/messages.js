@@ -7,6 +7,7 @@ const statusIndex = {
   UNAUTORIZED: 401,
   FORBIDDEN: 403,
   DELETED: 204,
+  TO_MANY_REQUEST: 429,
 };
 
 const MESSAGE = {
@@ -84,6 +85,12 @@ const MESSAGE = {
       data: {
         users: data,
       },
+    };
+  },
+  TO_MANY_REQUEST: () => {
+    return {
+      status: statusIndex.TO_MANY_REQUEST,
+      data: {},
     };
   },
 };

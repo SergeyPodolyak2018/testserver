@@ -1,6 +1,6 @@
 const userRep = new Map();
 
-const save = (userModel) => {
+const save = async (userModel) => {
   userRep.set(userModel.id, userModel);
 };
 
