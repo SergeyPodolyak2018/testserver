@@ -1,4 +1,4 @@
-const codeService = require('../services/codeService');
+const urlService = require('../services/urlService');
 const rateService = require('../services/rateService');
 const MESSAGE = require('../helper/messages');
 
@@ -25,8 +25,7 @@ const checkRate = async (req, res, next) => {
 
 const getCode = async (req, res) => {
   let shortCode = res.locals.shorts;
-  const code = codeService.getCode(shortCode);
-  codeService.visitCode(shortCode);
+  const code = await urlService.getUrlByName(shortCode);
   res.redirect(code.url);
 };
 

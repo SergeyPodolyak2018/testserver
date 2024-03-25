@@ -2,6 +2,6 @@ const app = require('./app');
 const { PORT, BASE_URI } = require('./const');
 
 const port = PORT;
-app.listen(port, () =>
-  console.log(`App is running on port ${port}...${BASE_URI}`)
+console.log(port, () =>
+  log.info(`App is running on port ${port}...${BASE_URI}`)
 );

@@ -1,5 +1,4 @@
 const userService = require('../services/userService');
-const rateService = require('../services/rateService');
 const MESSAGE = require('../helper/messages');
 
 const getUsers = (req, res) => {
