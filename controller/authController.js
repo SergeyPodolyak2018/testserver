@@ -15,17 +15,15 @@ const verifyAccessToken = (req, res, next) => {
     const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET);
     const username = decoded?.username;
     if (username && getUserByName(username)) {
-      res.locals.decoded = decoded;
+      res.locals.decoded = { username, id: decoded.id };
       return next();
     } else {
       res.redirect('/login');
+      return;
     }
   } catch (err) {
     res.redirect('/login');
-
-    // console.log(err);
-    // const massage = MESSAGE.FORBIDDEN();
-    // return res.status(massage.status).json(massage.data);
+    return;
   }
 };
 

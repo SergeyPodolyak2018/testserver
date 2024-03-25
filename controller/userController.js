@@ -1,24 +1,23 @@
-const bcrypt = require('bcrypt');
-const UserModel = require('../models/user');
-const userRepository = require('../repository/userRepository');
+const userService = require('../services/userService');
+const rateService = require('../services/rateService');
 const MESSAGE = require('../helper/messages');
 
 const getUsers = (req, res) => {
-  const users = userRepository.getAll();
+  const users = userService.getAllUsers();
   const massage = MESSAGE.USERS(users);
   res.status(massage.status).json(massage.data);
 };
 
 const getUser = (req, res) => {
-  const users = userRepository.getAll();
+  const users = userService.getAllUsers();
   const massage = MESSAGE.USERS(users);
   res.status(massage.status).json(massage.data);
 };
 
 const postUser = async (req, res) => {
   const { username, password } = req.body;
-  const encryptPass = await bcrypt.hash(password, 10);
-  userRepository.save(new UserModel(username, encryptPass));
+  await userService.saveUser(username, password);
+
   res.redirect('/login');
 };
 
