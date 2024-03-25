@@ -1,21 +1,15 @@
-const UrlModel = require('../models/url.js');
-const urlepository = require('../repository/urlRepository.js');
-const userRepository = require('../repository/userRepository.js');
-const MESSAGE = require('../helper/messages.js');
-const rateService = require('../services/rateService.js');
+const urlService = require('../services/urlService.js');
+const userService = require('../services/userService.js');
 
 const getUrls = async (req, res) => {
-  const urls = urlepository.getAll();
+  const urls = await urlService.getAll(res.locals.decoded.id);
   res.render('./pages/urls.ejs', { urls });
 };
 
 const postUrls = async (req, res) => {
   const { url } = req.body;
-  const user = userRepository.getByName(res.locals.decoded.username);
-  const urlObj = new UrlModel(url, user.id);
-  await urlepository.save(urlObj);
-  await rateService.initUrlRate(urlObj.id);
-
+  const user = await userService.getUserByName(res.locals.decoded.username);
+  await urlService.saveUrl(user.id, url);
   res.redirect('/url');
 };
 
