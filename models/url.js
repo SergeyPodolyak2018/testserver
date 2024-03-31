@@ -9,7 +9,7 @@ class UrlModel {
   constructor(url, user) {
     this.url = url;
     this.visits = 0;
-    this.user = user;
+    this.user_id = user;
     this.created_time = new Date().getTime();
     this.id = generateHash(5);
   }

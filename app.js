@@ -5,7 +5,6 @@ const { BASE_URI } = require('./const');
 const urlRouter = require('./routes/urlRouter');
 const codeRouter = require('./routes/codeRouter');
 const userRouter = require('./routes/userRouter');
-const allUsersRouter = require('./routes/allUsersRouter');
 const loginRouter = require('./routes/loginRouter');
 const createRouter = require('./routes/createRouter');
 const mainRouter = require('./routes/mainRouter');

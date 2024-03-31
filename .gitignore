@@ -130,3 +130,4 @@ dist
 .pnp.*
 .history
 dump.rdb
+storage/test.db
