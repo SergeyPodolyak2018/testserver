@@ -1,6 +1,8 @@
 const urlService = require('../services/urlService');
 const rateService = require('../services/rateService');
 const MESSAGE = require('../helper/messages');
+const Logger = require('../logger.js');
+const log = new Logger('urlController.js');
 
 const checkId = (req, res, next, id) => {
   const someId = id || req.params.id;
@@ -26,7 +28,7 @@ const checkRate = async (req, res, next) => {
 const getCode = async (req, res) => {
   let shortCode = res.locals.shorts;
   const code = await urlService.getUrlByName(shortCode);
-  res.redirect(code.url);
+  res.redirect(code[0].url);
 };
 
 module.exports = { getCode, checkId, checkRate };

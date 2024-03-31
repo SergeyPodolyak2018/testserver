@@ -1,18 +1,16 @@
 const userRep = new Map();
-const db = require('../db/sqlite');
-const userQuery = require('../querytemplates/users.js');
-const getThenable = require('../helper/thenable.js');
+
+const db = require('../dbModel/user.js');
 
 const save = (userModel) => {
-  const sql = userQuery.insertUser(userModel);
-  return getThenable((resolve, reject) => {
-    db.run(sql, [], function (err) {
-      if (!err) {
-        return void resolve({ id: this.lastID });
-      }
-      reject({ err });
-    });
-  });
+  return db
+    .query()
+    .insert({
+      name: userModel.name,
+      password: userModel.password,
+      created_time: userModel.created_time,
+    })
+    .returning('id');
 };
 
 const get = (id) => {
@@ -20,15 +18,7 @@ const get = (id) => {
 };
 
 const getByName = (name) => {
-  const sql = userQuery.getUserByName(name);
-  return getThenable((resolve, reject) => {
-    db.get(sql, [], function (err, data) {
-      if (!err) {
-        return void resolve(data);
-      }
-      reject({ err });
-    });
-  });
+  return db.query().select('*').where('name', '=', name);
 };
 
 const getAll = () => {
