@@ -3,6 +3,8 @@ const jwt = require('jsonwebtoken');
 const { ACCESS_TOKEN_SECRET } = require('../const.js');
 const MESSAGE = require('../helper/messages.js');
 const UserService = require('../services/userService.js');
+const Logger = require('../logger.js');
+const log = new Logger('loginController.js');
 
 const loginUserPage = async (req, res) => {
   res.render('./pages/login.ejs');
@@ -13,11 +15,12 @@ const createUserPage = async (req, res) => {
 
 const loginUser = async (req, res) => {
   const { username, password } = req.body;
+  log.info(username, password);
   try {
     const user = await UserService.getUserByName(username);
-    if (await bcrypt.compare(password, user.password)) {
+    if (await bcrypt.compare(password, user[0].password)) {
       const accessToken = jwt.sign(
-        { username, id: user.id },
+        { username, id: user[0].id },
         ACCESS_TOKEN_SECRET,
         {
           expiresIn: '2h',
